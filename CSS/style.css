@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/*********************** PARTIE HEADER *****************************/
 .headerContainer { 
     display: flex;
     width: 100%;
@@ -36,6 +37,8 @@
     list-style-type: none;
 } */
 
+/*********************** PARTIE VIDEO BG *****************************/
+
 #background-video {
     height: 100%;
     width: 100%;
@@ -47,3 +50,16 @@
     bottom: 0;
     z-index: -1;
     }
+
+/*********************** PARTIE FORM *****************************/
+
+.formContainer {
+     width: 50vw;
+     padding: 50px;
+    /* height: 100vh; */ 
+    background: rgba(245, 222, 179, 0.549);
+    margin: 0 auto;
+    margin-top: 15%;
+    text-align: center;
+}
+
