@@ -17,7 +17,6 @@ function ajouterProduit() {
         return;
     }
 
-
     let produit = {
         nom: nom,
         quantite: quantite,
@@ -28,7 +27,6 @@ function ajouterProduit() {
         // degreAlcool: degreAlcool,
         marge: marge,
     };
-
 
     let produitJSON = JSON.stringify(produit);
     localStorage.setItem(nom, produitJSON);
@@ -58,7 +56,6 @@ function ajouterProduit() {
     tdPrixVenteTTCTotal.textContent = `${prixVenteTTC * quantite} €`
     
 
-
     tr.appendChild(tdNom);
     tr.appendChild(tdQuantite);
     tr.appendChild(tdTypeProduit);
@@ -69,7 +66,6 @@ function ajouterProduit() {
     tr.appendChild(tdMarge);
     tr.appendChild(tdPrixVenteTTC);
     tr.appendChild(tdPrixVenteTTCTotal);
-
 
     stockBody.appendChild(tr);
 }
