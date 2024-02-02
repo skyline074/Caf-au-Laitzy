@@ -39,16 +39,18 @@
 
 /*********************** PARTIE VIDEO BG *****************************/
 
+
 #background-video {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: cover; 
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: -1;
+    overflow: hidden;
     }
 
 /*********************** PARTIE FORM *****************************/
@@ -57,12 +59,12 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
+    box-shadow: 0 0 10px rgba(228, 121, 7, 0.1);
+    max-width: 600px;
     margin: auto;
     margin-top: 90px;
 }
-h1, h2 {
+h1, h2, p {
     color: #333;
     text-align: center;
     margin: 20px;
@@ -95,5 +97,49 @@ input[type="button"] {
 input[type="button"]:hover {
     background-color: #ce7911dc;
 }
+
+/*********************** TABLEAU DES STOCKS *****************************/
+
+.stockContainer {
+    background-color: hsl(0, 0%, 100%);
+    margin-top: 50px;
+    height: 100vh;
+    
+}
+
+.stockContainer h2 {
+ padding-top: 40px;
+}
+
+
+table {
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  th {
+    background-color: #4caf50;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  tr:hover {
+    background-color: #ddd;
+  }
+
+
+
 
 

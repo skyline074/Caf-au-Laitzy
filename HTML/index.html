@@ -23,54 +23,86 @@
     </header>
 
 <!-- PARTIE ACCUEIL -->
-    <section>
+    <section class="accueilContainer">
       <video id="background-video" autoplay loop muted>
         <source src="/video (2160p).mp4" type="video/mp4" />
       </video>
 
       <div class="formContainer">
-        <h1>Le Café Place</h1>
+        <h1>Café Laitzy</h1>
         <p>Bienvenue sur l'application de gestion de stock du Café Place !</p>
 
         <form id="productForm">
-          <h2>Ajouter un produit</h2>
+          <h2><u>Ajouter un produit :</u></h2>
           <label for="nom">Nom du produit :</label>
           <input type="text" id="nom" name="nom" />
           
 
           <label for="quantite">Quantité à ajouter : </label>
-          <input type="number" id="quantite" name="quantite" />
+          <input type="number" id="quantite" name="quantite" min="0" />
           <br />
 
-          <label for="prixAchat">Prix d'achat HT : </label>
-          <input type="number" id="prixAchat" name="prixAchat" />
+          <label for="prixAchat">Prix d'achat HT (Unité) : </label>
+          <input type="number" id="prixAchat" name="prixAchat" min="0" />
 
 
-          <label for="prixVente">Prix de vente HT : </label>
-          <input type="number" id="prixVente" name="prixVente" />
+          <label for="prixVente">Prix de vente HT (Unité) : </label>
+          <input type="number" id="prixVente" name="prixVente" min="0" onchange="calculerPrixVenteTTC()"/>
           <br />
 
           <label for="type"> Type de produit : </label>
-          <select id="type" name="type">
+          <select id="type" name="type" onchange="ajusterChamps()">
+            <option value="" disabled selected>--Veuillez choisir un type de produit--</option>
             <option value="Boisson alcoolisée">Boisson alcoolisée</option>
-            <option value="Boisson non alcoolisée">
-              Boisson non alcoolisée
-            </option>
+            <option value="Boisson non alcoolisée">Boisson non alcoolisée</option>
             <option value="Autre">Autre</option>
           </select>
+           
+          <label id="labelDegreAlcool" for="degreAlcool" style="display: none;">Degré d'alcool :</label>
+           <select name="degreAlcool" id="degreAlcool" style="display: none;">
+            <option value="" disabled selected>--Veuillez choisir un degré d'alcool--</option>
+            <option value="5">Bière ≈ 5 %</option>
+            <option value="12">Vin, champagne ≈ 12 %</option>
+            <option value="18">Vin fortifié, apéritif ≈ 18 %</option>
+            <option value="18"> Liqueur ≈ 30 %</option>
+            <option value="18">Alcool fort ≈ 40 %</option>
+           </select>
+          <br>
 
-
-          <label for="degreAlcool">
+          <!-- <label for="degreAlcool">
             Degré d'alcool (uniquement pour les alcools) :
           </label>
           <input type="number" id="degreAlcool" name="degreAlcool" />
-          <br>
-          <input type="button" value="Ajouter le produit" onclick="ajouterProduit()"/>
+          <br> -->
+          <input type="button" value="Ajouter le produit" id="ajouterButton" onclick="ajouterProduit()"/>
         </form>
       </div>
     </section>
 
+    <section class = "stockContainer">
+    <h2>Tableau des stocks</h2>
+    <table id="stockTable">
+        <thead>
+          <tr>
+            <th style="background: #515155; width: 150px;">Nom</th>
+            <th style="background: #515155; width: 90px">Quantité</th>
+            <th style="background: #515155; width: 200px">Type de produit</th>
+            <th style="background: #410289; width: 90px">Prix d'achat HT (Unité)</th>
+            <th style="background: #2f2f6e; width: 90px">Prix d'achat HT (Total)</th>
+            <th style="background: #410289;; width: 90px;">Prix de vente HT (Unité)</th>
+            <th style="background: #2f2f6e; width: 90px;">Prix de vente HT(Total)</th>
+            <th style="background: #515155; width: 90px;">Marge HT (Total)</th>
+            <th style="background: #2e1401d2; width: 90px;">Prix de vente TTC (Unité)</th>
+            <th style="background: #2e1401d2; width: 90px;">Prix de vente TTC (Total)</th>
+
+          </tr>
+        </thead>
+        <tbody id="stockBody"></tbody>
+      </table>
+
+    </section>
 
 
+<script src="/JAVASCRIPT/script.js"></script>
   </body>
 </html>
