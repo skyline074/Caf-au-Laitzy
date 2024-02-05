@@ -44,7 +44,7 @@
     height: 100vh;
     width: 100%;
     object-fit: cover; 
-    position: fixed;
+    position:  absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -108,13 +108,14 @@ input[type="button"]:hover {
 }
 
 .stockContainer h2 {
+margin-top: 150px;
  padding-top: 40px;
 }
 
 
 table {
     justify-content: center;
-    width: 80%;
+    width: 95%;
     margin: auto;
     margin-top: 50px;
     border-collapse: collapse;
@@ -141,6 +142,12 @@ table {
     width: 30px; 
     box-shadow: none; 
     border: none;
+}
+
+#rechercher {
+    width: 20%;
+    margin-left: 20px;
+    
 }
 
 

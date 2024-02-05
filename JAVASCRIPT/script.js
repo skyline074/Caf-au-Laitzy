@@ -99,14 +99,38 @@ function renderArray(array) {
            alert('Le produit a bien été retiré du stock')
        });
 
+        // Boutons incrémenter et décrémenter
+        let incrementButton = document.createElement("button");
+        incrementButton.innerText = "+";
+        incrementButton.style.padding = "10px"
+        incrementButton.style.marginRight = "10px"
+        tr.appendChild(incrementButton);
+
+        let decrementButton = document.createElement("button");
+        decrementButton.innerText = "-";
+        decrementButton.style.padding = "10px"
+        tr.appendChild(decrementButton);
+
+        // Événement pour incrémenter la quantité
+        incrementButton.addEventListener("click", function () {
+            informations.informationQuantite++;
+            localStorage.setItem("stockArray", JSON.stringify(stockArray));
+            renderArray(stockArray);
+        });
+        
+        // Événement pour décrémenter la quantité (avec vérification pour éviter les quantités négatives)
+        decrementButton.addEventListener("click", function () {
+            if (informations.informationQuantite > 0) {
+                informations.informationQuantite--;
+                localStorage.setItem("stockArray", JSON.stringify(stockArray));
+                renderArray(stockArray);
+            }
+        });
        stockBody.appendChild(tr);
 
     });
 
 }
-
-
-
 
 // Sauvegarde 
 let stockSaved = JSON.parse(localStorage.getItem("stockArray"));
@@ -177,10 +201,8 @@ function ajusterChamps() {
     }
 }
 
-
 function toggleTable() {
     var stockTable = document.getElementById("stockTable");
     var display = stockTable.style.display;
     stockTable.style.display = (display === "none") ? "table" : "none";
 }
-
