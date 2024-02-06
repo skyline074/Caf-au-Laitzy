@@ -10,11 +10,12 @@ let stockBody = document.getElementById("stockBody");
 let filterButton = document.querySelector(".filterButton");
 let rechercherInput = document.getElementById("rechercher");
 
-
-
 // 
 let stockArray;
 let id = 0;
+
+
+
 
 // Fonction calculer prix Vente
 function calculerPrixVenteTTC(inputPrixVente, selectType) {
@@ -27,8 +28,10 @@ function calculerPrixVenteTTC(inputPrixVente, selectType) {
     }
 
     switch (selectType) {
+        case "Boisson alcoolisée":
+            tauxTVA = 0.8;
+            break;
         case "Soft":
-        case "Boisson non alcoolisée":
         case "Autre":
             tauxTVA = 0.2; // 20%
             break;
@@ -46,6 +49,7 @@ function renderArray(array) {
     stockBody.innerHTML =""; 
 
     array.forEach(function (informations, index) {
+
 
         let marge = (informations.informationPrixVente - informations.informationPrixAchat).toFixed(2);
         let prixVenteTTC = calculerPrixVenteTTC(informations.informationPrixVente, informations.informationType);
@@ -84,6 +88,8 @@ function renderArray(array) {
         tr.appendChild(tdMarge);
         tr.appendChild(tdPrixVenteTTC);
         tr.appendChild(tdPrixVenteTTCTotal);
+
+
 
          // Création d'un input pour modifier le prix
          let editPriceInput = document.createElement("input");
@@ -139,6 +145,7 @@ function renderArray(array) {
            alert('Le produit a bien été retiré du stock')
        });
 
+    
         // Boutons incrémenter et décrémenter
         let incrementButton = document.createElement("button");
         incrementButton.innerText = "+";
@@ -263,6 +270,13 @@ function ajusterChamps() {
     }
 }
 
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     let detailButtons = document.querySelectorAll(".detailButton");
     detailButtons.forEach(button => {
@@ -282,3 +296,4 @@ Type de produit : ${product.informationType}`);
         });
     });
 });
+
