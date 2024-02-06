@@ -99,7 +99,6 @@ function renderArray(array) {
  
          editSaveButton.style.padding = "5px";
          editSaveButton.style.height = "63px";
-         editSaveButton.style.marginLeft = "10px";
  
          editSaveButton.addEventListener("click", function () {
              if (editSaveButton.innerText === "Modifier le prix de vente") {
@@ -123,13 +122,14 @@ function renderArray(array) {
  
           // Boutton supprimer
        let supprimerButton = document.createElement("button");
-       supprimerButton.innerText = "Supprimer le produit du stock";
+       supprimerButton.innerText = "🗑";
        tr.appendChild(supprimerButton);
 
        supprimerButton.style.padding = "10px";
        supprimerButton.style.height = "63px"
-       supprimerButton.style.background = "grey"
+       supprimerButton.style.background = "white"
        supprimerButton.style.color = "white"
+       supprimerButton.style.border = "white"
 
        supprimerButton.addEventListener("click", function () {
            tr.remove();
@@ -263,3 +263,22 @@ function ajusterChamps() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    let detailButtons = document.querySelectorAll(".detailButton");
+    detailButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            let productName = button.parentElement.className;
+            let product = stockArray.find(item => item.informationNom === productName);
+            if (product) {
+                alert(`Détails du produit :
+Nom : ${product.informationNom}
+Quantité : ${product.informationQuantite}
+Prix d'achat HT (Unité) : ${product.informationPrixAchat} €
+Prix de vente HT (Unité) : ${product.informationPrixVente} €
+Type de produit : ${product.informationType}`);
+            } else {
+                alert("Détails du produit non trouvés.");
+            }
+        });
+    });
+});

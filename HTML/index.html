@@ -14,6 +14,7 @@
       <nav class="navContainer">
         <ul>
           <li><a href="./produits.html">Consulter la liste des produits</a></li>
+          <li><a href="#monancre">Afficher le stock</a></li>
         </ul>
       </nav>
     </header>
@@ -75,6 +76,8 @@
       </div>
     </section>
 
+    <div id="monancre"></div>
+
     <section class = "stockContainer">
 
     <h2>Tableau des stocks</h2>
@@ -86,16 +89,16 @@
     <table id="stockTable">
         <thead>
           <tr>
-            <th style="width: 30px;">Nom</th>
-            <th style="width: 140px">Quantité</th>
-            <th style="width: 110px">Type de produit</th>
-            <th style="background: #410289; width: 90px">Prix d'achat HT (Unité)</th>
-            <th style="background: #2f2f6e; width: 90px">Prix d'achat HT (Total)</th>
-            <th style="background: #410289;; width: 90px;">Prix de vente HT (Unité)</th>
-            <th style="background: #2f2f6e; width: 90px;">Prix de vente HT (Total)</th>
-            <th style="background: #515155; width: 60px;">Marge HT (Unité)</th>
-            <th style="background: #2e1401d2; width: 90px;">Prix de vente TTC (Unité)</th>
-            <th style="background: #2e1401d2; width: 90px;">Prix de vente TTC (Total)</th>
+            <th>Nom</th>
+            <th>Quantité</th>
+            <th>Type de produit</th>
+            <th style= "width: 150px"><mark>Prix d'achat HT</mark>  (Unité)</th>
+            <th style="width: 150px"><mark>Prix d'achat HT</mark> (Total)</th>
+            <th style="width: 150px;"><mark style="background-color: aqua;">Prix de vente HT</mark>  (Unité)</th>
+            <th style="width: 150px;"><mark style="background-color: aqua;">Prix de vente HT</mark>  (Total)</th>
+            <th style="width: 100px;">Marge HT (Unité)</th>
+            <th style="width: 170px;"><mark style="background-color: rgb(252, 179, 255);">Prix de vente TTC</mark> (Unité)</th>
+            <th style="width: 170px;"><mark style="background-color: rgb(252, 179, 255);">Prix de vente TTC</mark> (Total)</th>
           </tr>
         </thead>
         <tbody id="stockBody"></tbody>
