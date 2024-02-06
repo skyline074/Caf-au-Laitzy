@@ -11,15 +11,11 @@
   <body>
     <header class="headerContainer">
       <img src="/IMAGES/logo/logocafe.png" alt="logo" />
-      <!-- <nav class="navContainer">
+      <nav class="navContainer">
         <ul>
-          <li><a href="">Les Produits</a></li>
-          <li><a href="">A propos</a></li>
-          <li><a href="">A propos</a></li>
-          <li><a href="">A propos</a></li>
-          <li><a href="">A propos</a></li>
+          <li><a href="./produits.html">Consulter la liste des produits</a></li>
         </ul>
-      </nav> -->
+      </nav>
     </header>
 
 <!-- PARTIE ACCUEIL -->
@@ -30,7 +26,7 @@
 
       <div class="formContainer">
         <h1>Café Laitzy</h1>
-        <p>Bienvenue sur l'application de gestion de stock du Café Place !</p>
+        <p>Bienvenue sur l'application de gestion de stock du Café Laitzy !</p>
 
         <form id="productForm">
           <h2><u>Ajouter un produit :</u></h2>
@@ -54,7 +50,7 @@
           <select id="type" name="type" onchange="ajusterChamps()">
             <option value="" disabled selected>--Veuillez choisir un type de produit--</option>
             <option value="Boisson alcoolisée">Boisson alcoolisée</option>
-            <option value="Boisson non alcoolisée">Boisson non alcoolisée</option>
+            <option value="Soft">Soft</option>
             <option value="Autre">Autre</option>
           </select>
            
@@ -80,15 +76,19 @@
     </section>
 
     <section class = "stockContainer">
+
     <h2>Tableau des stocks</h2>
+ <div class="rechercherContainer">
     <label for="rechercher">Rechercher un produit : </label>
     <input type="text" id="rechercher" class="rechercher">
+    <button class="filterButton">Rechercher</button>
+</div>
     <table id="stockTable">
         <thead>
           <tr>
-            <th style="background: #515155; width: 30px;">Nom</th>
-            <th style="background: #515155; width: 20px">Quantité</th>
-            <th style="background: #515155; width: 110px">Type de produit</th>
+            <th style="width: 30px;">Nom</th>
+            <th style="width: 140px">Quantité</th>
+            <th style="width: 110px">Type de produit</th>
             <th style="background: #410289; width: 90px">Prix d'achat HT (Unité)</th>
             <th style="background: #2f2f6e; width: 90px">Prix d'achat HT (Total)</th>
             <th style="background: #410289;; width: 90px;">Prix de vente HT (Unité)</th>
@@ -96,15 +96,12 @@
             <th style="background: #515155; width: 60px;">Marge HT (Unité)</th>
             <th style="background: #2e1401d2; width: 90px;">Prix de vente TTC (Unité)</th>
             <th style="background: #2e1401d2; width: 90px;">Prix de vente TTC (Total)</th>
-            <th class="supprimerTH"></th>
-
           </tr>
         </thead>
         <tbody id="stockBody"></tbody>
       </table>
 
-    </section>
-
+ 
 
 <script src="/JAVASCRIPT/script.js"></script>
   </body>

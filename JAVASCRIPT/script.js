@@ -7,6 +7,9 @@ let inputPrixVente = document.getElementById("prixVente");
 let selectType = document.getElementById("type");
 // Création variables pour le tableau
 let stockBody = document.getElementById("stockBody");
+let filterButton = document.querySelector(".filterButton");
+let rechercherInput = document.getElementById("rechercher");
+
 
 
 // 
@@ -24,7 +27,7 @@ function calculerPrixVenteTTC(inputPrixVente, selectType) {
     }
 
     switch (selectType) {
-        case "Boisson alcoolisée":
+        case "Soft":
         case "Boisson non alcoolisée":
         case "Autre":
             tauxTVA = 0.2; // 20%
@@ -44,7 +47,7 @@ function renderArray(array) {
 
     array.forEach(function (informations, index) {
 
-        let marge = informations.informationPrixVente - informations.informationPrixAchat;
+        let marge = (informations.informationPrixVente - informations.informationPrixAchat).toFixed(2);
         let prixVenteTTC = calculerPrixVenteTTC(informations.informationPrixVente, informations.informationType);
 
         let tr = document.createElement("tr");
@@ -63,12 +66,12 @@ function renderArray(array) {
         tdQuantite.textContent = informations.informationQuantite;
         tdTypeProduit.textContent = informations.informationType;
         tdPrixAchat.textContent = `${informations.informationPrixAchat} €`;
-        tdPrixAchatTotal.textContent = `${informations.informationPrixAchat * informations.informationQuantite} €`;
+        tdPrixAchatTotal.textContent = (informations.informationPrixAchat * informations.informationQuantite).toFixed(2) + ` €`;
         tdPrixVente.textContent = `${informations.informationPrixVente} €`;
-        tdPrixVenteTotal.textContent = `${informations.informationPrixVente * informations.informationQuantite} €`;
+        tdPrixVenteTotal.textContent = (informations.informationPrixVente * informations.informationQuantite).toFixed(2) + `€`;
         tdMarge.textContent = `${marge} €`;
         tdPrixVenteTTC.textContent = `${prixVenteTTC} €`;
-        tdPrixVenteTTCTotal.textContent = `${prixVenteTTC * informations.informationQuantite} €`
+        tdPrixVenteTTCTotal.textContent = (prixVenteTTC * informations.informationQuantite).toFixed(2) + ` €`;
 
 
         tr.appendChild(tdNom);
@@ -82,14 +85,51 @@ function renderArray(array) {
         tr.appendChild(tdPrixVenteTTC);
         tr.appendChild(tdPrixVenteTTCTotal);
 
-
+         // Création d'un input pour modifier le prix
+         let editPriceInput = document.createElement("input");
+         editPriceInput.type = "number";
+         editPriceInput.placeholder = "Enter new price";
+         editPriceInput.style.display = "none"; // Hide initially
+         tdPrixVente.appendChild(editPriceInput);
+ 
+         // Mofifier et sauvegarder le prix
+         let editSaveButton = document.createElement("button");
+         editSaveButton.innerText = "Modifier le prix de vente";
+         tr.appendChild(editSaveButton);
+ 
+         editSaveButton.style.padding = "5px";
+         editSaveButton.style.height = "63px";
+         editSaveButton.style.marginLeft = "10px";
+ 
+         editSaveButton.addEventListener("click", function () {
+             if (editSaveButton.innerText === "Modifier le prix de vente") {
+                 // Switch to edit mode
+                 editSaveButton.innerText = "Enregistrer";
+                 editPriceInput.style.display = "block";
+             } else {
+                 let newPrice = parseFloat(editPriceInput.value);
+ 
+                 if (!isNaN(newPrice) && newPrice >= 0) {
+                     informations.informationPrixVente = newPrice;
+                     localStorage.setItem("stockArray", JSON.stringify(stockArray));
+                     renderArray(stockArray);
+                     editSaveButton.innerText = "Modifier le prix de vente";
+                     editPriceInput.style.display = "none";
+                 } else {
+                     alert("Merci d'entrer un chiffre valide et non-négatif");
+                 }
+             }
+         });
+ 
           // Boutton supprimer
        let supprimerButton = document.createElement("button");
-       supprimerButton.innerText = "Supprimer";
+       supprimerButton.innerText = "Supprimer le produit du stock";
        tr.appendChild(supprimerButton);
 
        supprimerButton.style.padding = "10px";
-       supprimerButton.style.height = "70px"
+       supprimerButton.style.height = "63px"
+       supprimerButton.style.background = "grey"
+       supprimerButton.style.color = "white"
 
        supprimerButton.addEventListener("click", function () {
            tr.remove();
@@ -102,14 +142,15 @@ function renderArray(array) {
         // Boutons incrémenter et décrémenter
         let incrementButton = document.createElement("button");
         incrementButton.innerText = "+";
-        incrementButton.style.padding = "10px"
-        incrementButton.style.marginRight = "10px"
-        tr.appendChild(incrementButton);
+        incrementButton.style.padding = "5px"
+        incrementButton.style.marginRight = "5px"
+        incrementButton.style.marginLeft = "20px"
+        tdQuantite.appendChild(incrementButton);
 
         let decrementButton = document.createElement("button");
         decrementButton.innerText = "-";
-        decrementButton.style.padding = "10px"
-        tr.appendChild(decrementButton);
+        decrementButton.style.padding = "5px"
+        tdQuantite.appendChild(decrementButton);
 
         // Événement pour incrémenter la quantité
         incrementButton.addEventListener("click", function () {
@@ -126,6 +167,14 @@ function renderArray(array) {
                 renderArray(stockArray);
             }
         });
+         
+        // Condition si la quantité est inférieur à 10
+        if (informations.informationQuantite < 10) {
+            tdQuantite.style.background = "red";
+        } else {
+            tdQuantite.style.background = "green"
+        }
+
        stockBody.appendChild(tr);
 
     });
@@ -174,6 +223,19 @@ ajouterButton.addEventListener("click", function (event) {
     }
 })
 
+// Quand je clique sur le bouton filter
+filterButton.addEventListener("click", function () {
+    // Je stock à l'intérieur de la variable contactArrayFilter le resultat retourné de la méthode filter
+    let stockArrayFilter = stockArray.filter(function (informations) {
+        // Je vais retourner dans contactArrayFilter le les informations du nom ou du type qui correspond à l'inputValue
+        return informations.informationNom.toLowerCase().includes(rechercherInput.value.toLowerCase()) ||
+        informations.informationType.toLowerCase().includes(rechercherInput.value.toLowerCase())      
+    })
+
+    // J'affiche le tableau des contactFiltré avec le paramètre contactArrayFilter
+    renderArray(stockArrayFilter);
+})
+
 // FONCTION CONSTRUCTEUR
 
 function Informations(id, informationNom, informationQuantite, informationPrixAchat, informationPrixVente, informationType) {
@@ -201,8 +263,3 @@ function ajusterChamps() {
     }
 }
 
-function toggleTable() {
-    var stockTable = document.getElementById("stockTable");
-    var display = stockTable.style.display;
-    stockTable.style.display = (display === "none") ? "table" : "none";
-}
