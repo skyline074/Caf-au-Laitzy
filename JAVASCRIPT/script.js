@@ -269,31 +269,3 @@ function ajusterChamps() {
         degreAlcoolInput.style.display = "none";
     }
 }
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    let detailButtons = document.querySelectorAll(".detailButton");
-    detailButtons.forEach(button => {
-        button.addEventListener("click", function() {
-            let productName = button.parentElement.className;
-            let product = stockArray.find(item => item.informationNom === productName);
-            if (product) {
-                alert(`Détails du produit :
-Nom : ${product.informationNom}
-Quantité : ${product.informationQuantite}
-Prix d'achat HT (Unité) : ${product.informationPrixAchat} €
-Prix de vente HT (Unité) : ${product.informationPrixVente} €
-Type de produit : ${product.informationType}`);
-            } else {
-                alert("Détails du produit non trouvés.");
-            }
-        });
-    });
-});
-
